@@ -1,0 +1,14 @@
+bool Reach_Distination(float d){
+      
+	if(d>=100){
+		
+		// seven segmant or led
+		RGBLED_Init();
+		RGB_Output(0x02);
+		return true;
+	
+	}
+  else {
+     return false;	
+	}
+}
