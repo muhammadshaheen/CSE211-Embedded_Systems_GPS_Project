@@ -1,0 +1,19 @@
+#include <math.h>
+#include <stdio.h>
+
+
+#define pi  3.14159265358979323846
+
+
+float Get_Distance(float long1, float lat1, float long2, float lat2) {
+	const long R = 6371e3; // metres
+	float lat1_rad = lat1 * (pi / 180);
+	float lat2_rad = lat2 * (pi / 180);
+	float change_lat = (lat2 - lat1) * (pi / 180); //change in latitude in radian
+	float change_lang = (long2 - long1) * (pi / 180); //change in langitude in radian
+	float a = sin(change_lat/2) * sin(change_lat/2) + cos(lat1_rad) * cos(lat2_rad) * sin(change_lang/2) * sin(change_lang/2);
+	float c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+	float d = R * c; // in metres
+	return d;
+}
