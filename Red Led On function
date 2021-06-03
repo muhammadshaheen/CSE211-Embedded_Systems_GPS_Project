@@ -1,0 +1,4 @@
+void Red_Led_On(unsigned char out){
+	GPIO_PORTF_DATA_R &= ~(0x02 | 0x04 | 0x08) ; // all leds Off (reset)
+	GPIO_PORTF_DATA_R |= out; //turn on red Led only
+}
