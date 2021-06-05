@@ -1,0 +1,10 @@
+void Delay(uint32_t times){
+	uint32_t i;
+	for(i =0; i < times; i++){
+	NVIC_ST_CTRL_R = 0;
+	NVIC_ST_RELOAD_R = 0X0030D3FF;
+	NVIC_ST_CURRENT_R = 0;
+	NVIC_ST_CTRL_R = 0x05;
+	while ((NVIC_ST_CTRL_R & 0x00010000)==0);
+	}
+}
