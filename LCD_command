@@ -1,0 +1,15 @@
+void LCD_command(unsigned char command)
+{
+GPIO_PORTA_DATA_R &= ~(0x60);  //SET RS=0 RW=0
+GPIO_PORTB_DATA_R =command;	
+GPIO_PORTA_DATA_R |=0x80 ; //enable =1
+delayUs(0);
+GPIO_PORTA_DATA_R &= ~(0xE0);
+
+	if (command < 4){
+		delayMs(2); /* command 1 and 2 needs up to 1.64ms */
+}
+	else{
+		delayUs(40); /* all others 40 us */	
+	}
+}
