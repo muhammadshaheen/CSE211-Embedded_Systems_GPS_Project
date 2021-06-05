@@ -1,0 +1,11 @@
+/* delay n microseconds (16 MHz CPU clock) */
+void delayUs(int times2){
+	int j;
+	for (j = 0;j<times2;j++){
+	NVIC_ST_CTRL_R = 0x00000000;
+	NVIC_ST_RELOAD_R = 0x0000000F;
+	NVIC_ST_CURRENT_R = 0x00000000;
+	NVIC_ST_CTRL_R = 0x05;
+	while ((NVIC_ST_CTRL_R & 0x00010000)==0);
+	}
+}
