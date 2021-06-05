@@ -1,0 +1,4 @@
+void seven_segment_input_B(unsigned char data)
+{
+GPIO_PORTB_DATA_R |= data;
+}
