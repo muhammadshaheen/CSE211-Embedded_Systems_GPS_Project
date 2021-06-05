@@ -1,0 +1,16 @@
+
+//B0-B7 = D0=D7
+//Rs = A5
+//Rw = A6
+//E = A7
+void LCD_data(unsigned char data)
+{
+GPIO_PORTA_DATA_R |= 0x20;  //SET RS=1
+GPIO_PORTA_DATA_R &= ~0x40;  //SET RW=0
+GPIO_PORTB_DATA_R =data;
+GPIO_PORTA_DATA_R |=0x80 ; //enable =1
+delayUs(0);
+GPIO_PORTA_DATA_R &= ~(0xE0);
+delayUs(40);
+	
+}
