@@ -1,0 +1,35 @@
+#include<string.h>
+
+void UART7Init(void){
+        SYSCTL_RCGCUART_R |= 0x80;
+	SYSCTL_RCGCGPIO_R |= 0x10;
+	UART7_CTL_R = 0; 
+	UART7_IBRD_R = 104;
+	UART7_FBRD_R = 11;
+	UART7_LCRH_R  |= 0x70;
+	UART7_CTL_R |= 0x301;
+	GPIO_PORTE_AFSEL_R |= 0x03;
+	GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R & ~0x000000FF) | 0x00000011;
+	GPIO_PORTE_DEN_R |= 0x03;
+}
+
+char UART7InputChar(void){
+	while((UART7_FR_R & 0x10) != 0);
+	return (char)(UART7_DR_R & 0xFF);
+}
+
+void GetCommand(char* command, int length){
+	char character;
+	int i = 0;
+	for(i = 0; i < length; i++){
+		character = UART7InputChar();
+		if(character != 0x2A){
+			command[i] = character;
+			UART_OutChar1(character);
+		}
+		else
+		{
+     			break;			
+		}
+	}
+}
