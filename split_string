@@ -1,0 +1,9 @@
+void split_string(char* x)
+{
+	int i;
+	for(i=0;i<strlen(x);i++)
+	{
+			
+				LCD_data(x[i]);
+	}
+}
