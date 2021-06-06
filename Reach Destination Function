@@ -1,10 +1,17 @@
-bool Reach_Destination(float d){          //this function return true when we reached our Destination then the red led will be on  
-	if(d>=100){                            //our final Destination is after 100m
-		// seven segmant or lcd functions
-		Red_Led_On(0x02);                   // to light the red led after reaching our Destination
-		return true;
-	}
-  else {
-     return false;	
-	}
+bool Reach_Destination(float d){                  //this function return true when we reached our Destination then the red led will be on
+       if(d>=100){                                //our final Destination is after 100m
+                                                  // to Print distance on LCD
+        LCD_command(1);                           // clear display 
+        LCD_command(0x80);                        // lcd cursor location 
+        delayMs(500);
+        print_string("    Welcome");
+        LCD_command(0xC0);                        // lcd cursor location 
+        print_string("Distance >= 100");
+        delayMs(500);
+        Red_Led_On(0x02);                         // to light the red led after reaching our Destination
+        return true;
+    }
+     else {                                      
+        return false;
+     }
 }
