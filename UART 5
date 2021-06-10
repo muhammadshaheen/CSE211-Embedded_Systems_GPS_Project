@@ -24,14 +24,24 @@ char Read_Character(void){                          // to read a Character from 
 }
 
 
-void Read_String(char* data , int length_String){                     //Read a string from UART 5 
+void Get_GPS_Reading(char* Reading_GPS){
 	char character;
-	int i = 0;
-	for(i = 0;i < length_String;i++){
-		character = Read_Character();
-		if(character == 0x2A){                              // if charater = ascii code of * break the loop 
-	             break;
-		  }
-			data[i] = character;
+	bool cond ;
+	int n = 0;
+	while(true){
+		character = Read_Character();   // reading one char from uart 7
+		if(character == 0x2A){          // end writing the reading if char = (*)
+			cond = false;
+			n = 0;                        //to rest index of arry of char
+			break;
+		}
+		if(cond == true)                // start writing the reading if char = ($)  
+		{
+     		Reading_GPS[n] = character;			
+                 n = n + 1;               			
+		}
+		if(character == 0x24){           // set the condition of statring a new reading
+     		cond = true;			 
+		}
 	}
 }
