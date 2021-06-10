@@ -29,7 +29,7 @@ void Get_GPS_Reading(char* Reading_GPS){
 	bool cond ;
 	int n = 0;
 	while(true){
-		character = Read_Character();   // reading one char from uart 7
+		character = Read_Character();   // reading one char from uart 5
 		if(character == 0x2A){          // end writing the reading if char = (*)
 			cond = false;
 			n = 0;                        //to rest index of arry of char
