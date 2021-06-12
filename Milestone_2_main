@@ -33,4 +33,43 @@ for(i=31;i<42;i++)
     }
 
     return longii;
+    
 }
+
+///////////////////////////////////////////// Directions Detection /////////////////////////////////////////////
+
+void Navigation(float long1, float lat1, float long2, float lat2){
+
+  float  delta_lat = lat2  - lat1;
+  float delta_long =   long2  - long1;
+  if (delta_lat>0 && delta_long>0){    //////NE
+      print_string("NE");
+  }
+  if (delta_lat<0 && delta_long>0){    //////SE
+      print_string("SE");
+   }
+
+  if (delta_lat>0 && delta_long<0){    //////NW
+      print_string("NW");
+   }
+
+  if (delta_lat<0 && delta_long<0){    //////SW
+      print_string("SW");
+   }
+  /////////////////
+  if (delta_lat==0 && delta_long>0){    //////E
+      print_string("E");
+  }
+  if (delta_lat<0 && delta_long==0){    //////S
+      print_string("S");
+   }
+
+  if (delta_lat==0 && delta_long<0){    //////N
+      print_string("N");
+   }
+
+  if (delta_lat<0 && delta_long==0){    //////S
+      print_string("S");
+   }
+}
+
