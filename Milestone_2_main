@@ -1,3 +1,12 @@
+///////////////////////////////////////////// Handling Buzzer /////////////////////////////////////////////
+
+void Buzzer_ON(void){             // turn ON buzzer
+    GPIO_PORTA_DATA_R |= 0x20;
+}
+void Buzzer_OFF(void){            // turn OFF buzzer
+    GPIO_PORTA_DATA_R &= ~0x20;
+}
+
 ///////////////////////////////////////////// Destination Detection /////////////////////////////////////////////
 
 bool Reach_Destination(float d){                  //this function return true when we reached our Destination then the red led will be on
