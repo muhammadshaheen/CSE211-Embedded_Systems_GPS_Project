@@ -32,41 +32,24 @@ int main(void){
     delayMs(500);
 
 
-
-
     print_string("Dist = ");
-
-
 
     ftoa(distance, rs, 4);
     print_string(rs);
 
 
-
-
     LCD_command(0xC0); /* lcd cursor location */
 
-
-
     delayMs(500);
-
-
-
 
 
     ftoa(newLat, res, 4);
     print_string(res);
     delayMs(500);
 
-
-
     ftoa(newLong, rr, 4);
 
-
-
     delayMs(500);
-
-
 
 
     print_string(rr);
@@ -74,13 +57,7 @@ int main(void){
     Navigation(oldLong, oldLat, newLong, newLat);
 
 
-
-
-
     Send_UART7_Bluetooth(rs); //send distance to application
-
-
-
 
     }
 
