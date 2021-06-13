@@ -1,0 +1,40 @@
+
+/////////////////////////////////////////////// Parsing GPS Longitude////////////////////////////////////
+
+float parsing_GPS_long(char* s){
+
+    int i;
+      int j;
+    char y[12];
+        char flag;
+    int long_deg;
+      float min;
+      float longii;
+      double longi;
+        j=0;
+    flag = s[43];
+
+
+for(i=31;i<42;i++)
+    {
+        y[j]=s[i];
+        j++;
+    }
+    y[11] = '\0';
+    longi = atof(y);
+
+
+   long_deg = longi/100;
+    longi -= long_deg*100;
+    min = longi/60.0;
+    longii = long_deg + min;
+
+
+    if(flag == 'W')
+    {
+        longii *= -1;
+    }
+
+    return longii;
+    
+}
