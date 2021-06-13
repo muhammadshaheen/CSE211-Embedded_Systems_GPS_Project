@@ -11,7 +11,7 @@ void UART5_Init(void){
 	UART5_CTL_R &= ~0x01;          //disable UART5
 	UART5_IBRD_R = 104;
 	UART5_FBRD_R = 11;
-	UART5_LCRH_R  |= 0x70;
+	UART5_LCRH_R  |= 0x60;
 	UART5_CTL_R |= 0x301;          //enable UART5
 	GPIO_PORTE_AFSEL_R |= 0x30;
 	GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R & ~0x00FF0000) | 0x00110000;
