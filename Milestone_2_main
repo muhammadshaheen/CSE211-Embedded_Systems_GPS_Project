@@ -11,7 +11,78 @@ int main(void){
                     if(! strcmp(check, "sssssss")){
                     Send_UART7_Bluetooth("Startread!"); //distance
                     }
+   while(1){
+    Get_GPS_Reading(GPS_Reading);
+    Buzzer_OFF();
+    if (oldLat == 0 || oldLong == 0)
+    {
+    oldLat = parsing_GPS_lat(GPS_Reading);
+    oldLong = parsing_GPS_long(GPS_Reading);
+    continue;
+    }
+    newLat = parsing_GPS_lat(GPS_Reading);
+    newLong = parsing_GPS_long(GPS_Reading);
 
+
+
+    if(((oldLat == 0) || (oldLong == 0) || (newLat == 0) || (newLong == 0)) != 1){
+    distance += Get_Distance(oldLong, oldLat, newLong, newLat);
+    LCD_command(1); /* clear display */
+    LCD_command(0x80); /* lcd cursor location */
+    delayMs(500);
+
+
+
+
+    print_string("Dist = ");
+
+
+
+    ftoa(distance, rs, 4);
+    print_string(rs);
+
+
+
+
+    LCD_command(0xC0); /* lcd cursor location */
+
+
+
+    delayMs(500);
+
+
+
+
+
+    ftoa(newLat, res, 4);
+    print_string(res);
+    delayMs(500);
+
+
+
+    ftoa(newLong, rr, 4);
+
+
+
+    delayMs(500);
+
+
+
+
+    print_string(rr);
+    delayMs(500);
+    Navigation(oldLong, oldLat, newLong, newLat);
+
+
+
+
+
+    Send_UART7_Bluetooth(rs); //send distance to application
+
+
+
+
+    }
 
         oldLat = newLat;
         oldLong = newLong;
