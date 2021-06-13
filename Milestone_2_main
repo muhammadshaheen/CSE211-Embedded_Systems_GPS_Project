@@ -1,3 +1,35 @@
+///////////////////////////////////////////// Prototypes /////////////////////////////////////////////
+
+void delayMs(int times);
+void delayUs(int times2);
+void LCD_command(unsigned char command);
+void LCD_data(unsigned char data);
+void LCD_init(void);
+void print_string(char* x);
+void Red_Led_On(unsigned char out);
+float Get_Distance(float long1, float lat1, float long2, float lat2);
+void Init_PortF(void);
+bool Reach_Destination(float d);
+void UART5_Init(void);
+void Get_GPS_Reading(char* GPD_Reading);
+void UART_Init(void);
+void UART_OutChar1(char data);
+void UART_OutChar(char* data);
+float parsing_GPS_lat(char* s);
+float parsing_GPS_long(char* s);
+void ftoa(float n, char* res, int afterpoint);
+int intToStr(int x, char str[], int d);
+void reverse(char* str, int len);
+void UART7Init(void);
+char UART7InputChar(void);
+void Get_UART7_Bluetooth(char* command_bluetoooth);
+void UART7_bluetooth_Send_Char(char data);
+void Send_UART7_Bluetooth(char* data);
+void Init_PortA (void);
+void Buzzer_ON(void);
+void Buzzer_OFF(void);
+void Navigation(float long1, float lat1, float long2, float lat2);
+
 int main(void){
     Init_PortF();                                                        // to initials Port F
     LCD_init();    // to initializeLCD
