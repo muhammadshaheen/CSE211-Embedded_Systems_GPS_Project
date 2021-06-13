@@ -74,6 +74,53 @@ void Get_GPS_Reading(char* Reading_GPS){          // to GET Readings from GPS th
               Red_Led_On(0x04);      //Lighting blue at the endf each reading
 }
 
+///////////////////////////////////////////// UART 7 Handling (Bluetooth Module) /////////////////////////////////////////////
+
+void UART7Init(void){
+    SYSCTL_RCGCUART_R |= 0x80;
+    SYSCTL_RCGCGPIO_R |= 0x10;
+    UART7_CTL_R = 0;
+    UART7_IBRD_R = 104;
+    UART7_FBRD_R = 11;
+    UART7_LCRH_R  |= 0x70;
+    UART7_CTL_R |= 0x301;
+    GPIO_PORTE_AFSEL_R |= 0x03;
+    GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R & ~0x000000FF) | 0x00000011;
+    GPIO_PORTE_DEN_R |= 0x03;
+}
+
+
+char UART7InputChar(void){
+    while((UART7_FR_R & 0x10) != 0);
+    return (char)(UART7_DR_R & 0xFF);
+}
+
+
+void Get_UART7_Bluetooth(char* command_bluetoooth){
+    char character;
+    int i = 0;
+    for(i = 0; i < 7; i++){
+            character = UART7InputChar();
+            command_bluetoooth[i] = character;
+            UART_OutChar1(character);
+        }
+}
+
+
+void UART7_bluetooth_Send_Char(char data){
+      while((UART0_FR_R & 0x20) != 0);
+      UART7_DR_R = data;
+
+}
+
+
+void Send_UART7_Bluetooth(char* data){
+    int i;
+    for (i=0;i < strlen(data);i++){
+      UART7_DR_R = data[i];
+    }
+}
+
 ///////////////////////////////////////////// Parsing GPS Output String /////////////////////////////////////////////
 
 float parsing_GPS_lat(char* s){
