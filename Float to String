@@ -1,0 +1,42 @@
+void ftoa(float n, char* res, int afterpoint)
+{ int neg_flag;
+    char ser[20];
+    int yyy;
+    float fpart;
+    int ipart;
+    int i;
+    neg_flag = 0;
+    if (n<0){
+       n=n*-1;
+         neg_flag = 1;
+    }
+    // Extract integer part
+    ipart = (int)n;
+
+    // Extract floating part
+    fpart = n - (float)ipart;
+
+    // convert integer part to string
+   i = intToStr(ipart, res, 0);
+
+    // check for display option after point
+    if (afterpoint != 0) {
+        res[i] = '.'; // add dot
+
+        // Get the value of fraction part upto given no.
+        // of points after dot. The third parameter
+        // is needed to handle cases like 233.007
+        fpart = fpart * pow(10, afterpoint);
+
+        intToStr((int)fpart, res + i + 1, afterpoint);
+
+    }
+        if(neg_flag==1){
+                ser[0] = '-';
+                strcat(ser, res);
+                strcpy(res,ser);
+              for(yyy=0;yyy<20;yyy++){
+                    ser[yyy] = '\0';
+                }
+            }
+}
