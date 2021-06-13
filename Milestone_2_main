@@ -1,3 +1,10 @@
+///////////////////////////////////////////// RGB Output /////////////////////////////////////////////
+
+void Red_Led_On(unsigned char out){              //to turn on Red Led the input must be 0x02
+    GPIO_PORTF_DATA_R &= ~(0x02 | 0x04 | 0x08) ; // all leds Off (reset)
+    GPIO_PORTF_DATA_R |= out;                    //turn on red Led only
+}
+
 ///////////////////////////////////////////// LCD Functions /////////////////////////////////////////////
 
 // data B0--B7   RS--A5 RW--A6 E--A7
