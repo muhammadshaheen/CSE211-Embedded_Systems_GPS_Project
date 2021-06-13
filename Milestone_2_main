@@ -1,3 +1,15 @@
+#include "tm4c123gh6pm.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <stdbool.h>
+
+///////////////////////////////////////////// Constants  /////////////////////////////////////////////
+
+#define pi  3.14159265358979323846
+
 ///////////////////////////////////////////// Prototypes /////////////////////////////////////////////
 
 void delayMs(int times);
@@ -29,6 +41,22 @@ void Init_PortA (void);
 void Buzzer_ON(void);
 void Buzzer_OFF(void);
 void Navigation(float long1, float lat1, float long2, float lat2);
+
+///////////////////////////////////////////// Global Variables /////////////////////////////////////////////
+
+char GPS_Reading[200] ;
+char res[20];
+char rr[20];
+char rs[20];
+float oldLat=0;
+float oldLong=0;
+float newLat;
+float   newLong;
+float distance;
+char command_bluetoooth [7];
+float distination;
+char check [7];
+
 
 int main(void){
     Init_PortF();                                                        // to initials Port F
