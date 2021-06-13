@@ -10,3 +10,16 @@ void UART_Init(void){
     GPIO_PORTA_PCTL_R = (GPIO_PORTA_PCTL_R & ~0xFF) | 0x00000011;
     GPIO_PORTA_DEN_R |= 0x03;
 }
+
+void UART_OutChar1(char data){             //Sending one character to PC (Putty) through uart 0
+      while((UART0_FR_R & 0x20) != 0);
+      UART0_DR_R = data;
+}
+
+
+void UART_OutChar(char* data){            //Sending String to PC (Putty) through uart 0
+    int i;
+    for (i=0; i < strlen(data); i++){
+      UART0_DR_R = data[i];
+    }
+}
