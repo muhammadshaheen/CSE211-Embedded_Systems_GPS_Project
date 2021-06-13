@@ -227,6 +227,21 @@ for(i=31;i<42;i++)
 
 ///////////////////////////////////////////// Float to String Conversion /////////////////////////////////////////////
 
+// C program for implementation of ftoa()
+// Reverses a string 'str' of length 'len'
+void reverse(char* str, int len)
+{
+    int i = 0, j = len - 1, temp;
+    while (i < j) {
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+        i++;
+        j--;
+    }
+}
+
+
 void ftoa(float n, char* res, int afterpoint)
 { int neg_flag;
     char ser[20];
