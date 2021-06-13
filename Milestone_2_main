@@ -1,3 +1,52 @@
+///////////////////////////////////////////// UART 5 Handling (GPS) /////////////////////////////////////////////
+
+void UART5_Init(void){
+  SYSCTL_RCGCUART_R |= 0x20;
+    SYSCTL_RCGCGPIO_R |= 0x10;
+    UART5_CTL_R &= ~0x01;          //disable UART5 to initialize uart 5 
+    UART5_IBRD_R = 104;
+    UART5_FBRD_R = 11;
+    UART5_LCRH_R  |= 0x60;
+    UART5_CTL_R |= 0x301;          //enable UART5
+    GPIO_PORTE_AFSEL_R |= 0x30;
+    GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R & ~0x00FF0000) | 0x00110000;
+    GPIO_PORTE_DEN_R |= 0x30;
+}
+
+
+char UART5InputChar(void){                          // to read a Character from uart 5
+    while((UART5_FR_R & 0x10) != 0);
+    return (char)(UART5_DR_R & 0xFF);
+}
+
+
+void Get_GPS_Reading(char* Reading_GPS){          // to GET Readings from GPS through uart 5
+    char character;
+    bool cond = false;
+    int n = 0;
+    delayMs(2000);             // delay between each reading 2 seconds due to the gps fix
+    Red_Led_On(0x08);          //Lighting Green Led at the beginning of each reading
+    while(1){
+        character = UART5InputChar();   // reading one char from uart 5
+        if((int)character == 0x2A){          // end writing the reading if char = (*)
+            cond = false;
+            n = 0;                        //to rest index of arry of char
+            break;
+        }
+        if(cond == true)                // start writing the reading if char = ($)
+        {
+            Reading_GPS[n] = character;
+            UART_OutChar1(Reading_GPS[n]); // send the character which tiva read from GPS to computer (Putty)
+             n = n + 1;
+        }
+        if((int)character == 0x24){           // set the condition of statring a new reading
+            cond = true;
+        }
+    }
+
+              Red_Led_On(0x04);      //Lighting blue at the endf each reading
+}
+
 /////////////////////////////////////////////// Parsing GPS Longitude////////////////////////////////////
 
 float parsing_GPS_long(char* s){
