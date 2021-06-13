@@ -1,4 +1,4 @@
-void split_string(char* x)
+void print_string(char* x)
 {
 	int i;
 	for(i=0;i<strlen(x);i++)
