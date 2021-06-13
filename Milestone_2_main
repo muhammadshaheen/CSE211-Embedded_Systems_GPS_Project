@@ -1,3 +1,37 @@
+int main(void){
+    Init_PortF();                                                        // to initials Port F
+    LCD_init();    // to initializeLCD
+    UART5_Init();
+    UART7Init();
+    UART_Init();
+    distance = 0;
+    Get_UART7_Bluetooth(command_bluetoooth);
+    distination = atof(command_bluetoooth);
+    Get_UART7_Bluetooth(check);
+                    if(! strcmp(check, "sssssss")){
+                    Send_UART7_Bluetooth("Startread!"); //distance
+                    }
+
+
+        oldLat = newLat;
+        oldLong = newLong;
+
+    if(distance>= distination){
+
+        Red_Led_On(0x02);
+        LCD_command(1);                           // clear display
+                LCD_command(0x80);                        // lcd cursor location
+                delayMs(500);
+                print_string("   Destination!");
+                delayMs(500);
+                Buzzer_ON();
+        break;
+        }
+
+}
+    return 0;
+}
+
 ///////////////////////////////////////////// Distance from coordinates calculation /////////////////////////////////////////////
 
 
