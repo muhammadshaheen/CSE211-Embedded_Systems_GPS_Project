@@ -1,0 +1,8 @@
+void Buzzer_ON(void){             // turn ON buzzer
+    GPIO_PORTA_DATA_R |= 0x20;
+}
+
+
+void Buzzer_OFF(void){            // turn OFF buzzer
+    GPIO_PORTA_DATA_R &= ~0x20;
+}
