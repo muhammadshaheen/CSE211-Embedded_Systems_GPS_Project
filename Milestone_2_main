@@ -98,7 +98,7 @@ void UART_OutChar1(char data){             //Sending one character to PC (Putty)
 
 void UART_OutChar(char* data){            //Sending String to PC (Putty) through uart 0
     int i;
-    for (i=0;i < strlen(data);i++){
+    for (i=0; i < strlen(data); i++){
       UART0_DR_R = data[i];
     }
 }
@@ -145,7 +145,7 @@ void UART7_bluetooth_Send_Char(char data){
 
 void Send_UART7_Bluetooth(char* data){
     int i;
-    for (i=0;i < strlen(data);i++){
+    for (i = 0; i < strlen(data); i++){
       UART7_DR_R = data[i];
     }
 }
