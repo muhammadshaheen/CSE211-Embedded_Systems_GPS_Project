@@ -1,0 +1,34 @@
+float parsing_GPS_lat(char* s){
+
+    int i;
+      int j;
+      char x[11];
+      char flag;
+      double lat;
+       int lat_deg;
+      float min;
+      float lati;
+        j=0;
+    flag = s[29];
+for(i=18;i<28;i++)
+{
+    x[j]=s[i];
+    j++;
+}
+
+    x[10] = '\0';
+
+    lat = atof(x);
+
+    lat_deg =(int) lat/100;
+    lat -= lat_deg*100;
+    min = lat/60.0;
+    lati = lat_deg + min;
+
+    if(flag == 'S')
+    {
+        lati *= -1;
+    }
+
+    return lati;
+}
